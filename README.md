@@ -327,8 +327,11 @@ Written at length in the app itself, and worth repeating here:
 
 ## Licence
 
-Code under the MIT Licence. NASA datasets are public domain; SoilGrids is
-CC BY 4.0; OpenStreetMap is ODbL. Per-dataset terms are carried in
-`public/data/datasets.json` and shown in the app.
+Code under the MIT Licence — see [`LICENSE`](LICENSE).
+
+The data is not ours to relicense: NASA datasets are public domain, SoilGrids
+is CC BY 4.0, OpenStreetMap is ODbL. Per-dataset terms are carried in
+`public/data/datasets.json`, shown in the app, and summarised in
+[`DATA-LICENCES.md`](DATA-LICENCES.md).
 
 NASA does not endorse this project, and this project is not a NASA product.

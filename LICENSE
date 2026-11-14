@@ -19,18 +19,3 @@ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
-
----
-
-This licence covers the code in this repository.
-
-The data under `public/data/` is a derived snapshot and is not ours to
-relicense. Its terms travel with it, per dataset, in
-`public/data/datasets.json` and are shown in the application:
-
-  - NASA SRTM, NASA POWER, MODIS and NEX-GDDP-CMIP6 are public domain.
-  - ISRIC SoilGrids is CC BY 4.0.
-  - The district boundary is UN OCHA COD-AB.
-  - Base map tiles are served live from OpenStreetMap, under ODbL.
-
-NASA does not endorse this project, and this project is not a NASA product.

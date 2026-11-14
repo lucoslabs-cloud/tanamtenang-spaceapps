@@ -1,0 +1,234 @@
+@import 'tailwindcss';
+
+/*
+ * One hue, two themes.
+ *
+ * The suitability ramp is a single-hue green, stepped in OKLCH lightness and
+ * machine-verified in the platform: monotone lightness, adjacent delta-L at
+ * least 0.06, hue spread under 4 degrees. Green-to-red was rejected on
+ * measurement rather than taste — it is a rainbow ramp, its lightness is not
+ * monotone so the classes stop being orderable at a glance, and red against
+ * green is the worst pairing for the commonest colour vision deficiencies.
+ *
+ * Suitability is monotone good-to-bad, which makes it sequential rather than
+ * diverging, so one hue is also the honest encoding. The ramp itself is read
+ * from the exported data so it cannot drift from the platform's; what is here
+ * is the surface the ramp sits on.
+ *
+ * Colour never carries meaning alone. Every surface that uses the ramp also
+ * prints the class code and its label.
+ */
+
+@theme {
+    --font-sans: ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+}
+
+:root {
+    color-scheme: light;
+
+    --surface: #fbfaf7;
+    --surface-raised: #ffffff;
+    --surface-sunken: #f2f0ea;
+    --border: #e2ded3;
+    --border-strong: #cdc7b7;
+
+    --ink: #1b1d19;
+    --ink-soft: #4c5149;
+    --ink-faint: #767c72;
+
+    --accent: #146932;
+    --accent-ink: #ffffff;
+    --accent-soft: #e6f2e9;
+
+    --warn: #8a4b06;
+    --warn-soft: #fcf0e2;
+    --danger: #8f2320;
+    --danger-soft: #fceceb;
+    --info: #0b5566;
+    --info-soft: #e5f3f6;
+
+    --rain: #1e6f8f;
+    --demand: #a8560d;
+    --temp: #8a3a52;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme='light']) {
+        color-scheme: dark;
+
+        --surface: #10130f;
+        --surface-raised: #181c17;
+        --surface-sunken: #0a0c09;
+        --border: #2a2f28;
+        --border-strong: #3d443b;
+
+        --ink: #eef1ec;
+        --ink-soft: #b2b9ae;
+        --ink-faint: #828a7e;
+
+        --accent: #3ef77f;
+        --accent-ink: #06210e;
+        --accent-soft: #15301e;
+
+        --warn: #f0b878;
+        --warn-soft: #2d1f0e;
+        --danger: #f09a94;
+        --danger-soft: #2e1413;
+        --info: #86cde0;
+        --info-soft: #0c2429;
+
+        --rain: #6fc2e3;
+        --demand: #f0b06a;
+        --temp: #e89bb0;
+    }
+}
+
+:root[data-theme='dark'] {
+    color-scheme: dark;
+
+    --surface: #10130f;
+    --surface-raised: #181c17;
+    --surface-sunken: #0a0c09;
+    --border: #2a2f28;
+    --border-strong: #3d443b;
+
+    --ink: #eef1ec;
+    --ink-soft: #b2b9ae;
+    --ink-faint: #828a7e;
+
+    --accent: #3ef77f;
+    --accent-ink: #06210e;
+    --accent-soft: #15301e;
+
+    --warn: #f0b878;
+    --warn-soft: #2d1f0e;
+    --danger: #f09a94;
+    --danger-soft: #2e1413;
+    --info: #86cde0;
+    --info-soft: #0c2429;
+
+    --rain: #6fc2e3;
+    --demand: #f0b06a;
+    --temp: #e89bb0;
+}
+
+html,
+body {
+    background: var(--surface);
+    color: var(--ink);
+}
+
+body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-wrap: pretty;
+}
+
+/* ------------------------------------------------------------- helpers -- */
+
+.card {
+    background: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 0.75rem;
+}
+
+.chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.1rem 0.45rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    font-size: 0.6875rem;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    padding: 0.5rem 0.9rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-strong);
+    background: var(--surface-raised);
+    color: var(--ink);
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 120ms ease, border-color 120ms ease;
+}
+
+.btn:hover {
+    background: var(--surface-sunken);
+}
+
+.btn:focus-visible,
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+[tabindex]:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.btn-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--accent-ink);
+}
+
+.btn-primary:hover {
+    background: var(--accent);
+    filter: brightness(1.08);
+}
+
+.btn[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+/* A number the reader should be able to line up with the one below it. */
+.tnum {
+    font-variant-numeric: tabular-nums;
+}
+
+input[type='range'] {
+    accent-color: var(--accent);
+}
+
+/* MapLibre's own chrome, pulled onto this surface. */
+.maplibregl-ctrl-group {
+    background: var(--surface-raised) !important;
+    border: 1px solid var(--border) !important;
+}
+
+.maplibregl-ctrl-group button + button {
+    border-top-color: var(--border) !important;
+}
+
+.maplibregl-ctrl-attrib {
+    background: color-mix(in srgb, var(--surface-raised) 85%, transparent) !important;
+    color: var(--ink-soft) !important;
+    font-size: 10px !important;
+}
+
+.maplibregl-ctrl-attrib a {
+    color: var(--ink-soft) !important;
+}
+
+.maplibregl-ctrl-icon {
+    filter: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}

@@ -1,0 +1,13 @@
+* text=auto eol=lf
+
+*.css diff=css
+*.html diff=html
+*.md diff=markdown
+
+# The grid rasters are Int16 little-endian, read straight into an
+# Int16Array. Git's binary detection is a heuristic over the first few
+# kilobytes, and a raster whose leading cells all fall outside the district
+# is a long run of the same two bytes — so this is stated rather than left to
+# be guessed. A single CRLF substitution inside one of these shifts every
+# value after it and silently corrupts the district.
+*.bin binary

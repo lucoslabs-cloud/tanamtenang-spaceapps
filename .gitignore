@@ -1,0 +1,14 @@
+# The root .gitignore only ignores /node_modules at the repository root, so
+# this build needs its own.
+node_modules
+dist
+.vite
+
+# Per-developer Claude Code settings. .claude/launch.json IS committed, since
+# it is how anyone on the team starts the dev server.
+.claude/settings.local.json
+
+# public/data IS committed on purpose. It is the whole point of this build:
+# `git clone && npm install && npm run dev` has to work without a database,
+# and 2 MB of snapshot is a fair price for that. Rebuild it with
+# `node tools/export.mjs` from a machine that has the platform running.

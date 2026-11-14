@@ -1,0 +1,28 @@
+{
+  "$schema": "https://www.schemastore.org/package.json",
+  "name": "tanamtenang-hackathon",
+  "private": true,
+  "type": "module",
+  "description": "The zero-install NASA Space Apps build of TanamTenang: no server, no database, no ingest.",
+  "scripts": {
+    "dev": "vite",
+    "build": "vue-tsc --noEmit && vite build",
+    "preview": "vite preview",
+    "check": "vue-tsc --noEmit",
+    "export": "node tools/export.mjs"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/node": "^26.6.4",
+    "@vitejs/plugin-vue": "^6.0.9",
+    "tailwindcss": "^4.3.3",
+    "typescript": "^5.9.3",
+    "vite": "^7.0.7",
+    "vue-tsc": "^3.3.12"
+  },
+  "dependencies": {
+    "@lucide/vue": "^1.72.0",
+    "maplibre-gl": "^6.12.0",
+    "vue": "^3.5.43"
+  }
+}

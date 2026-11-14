@@ -1,5 +1,7 @@
 # TanamTenang — the hackathon build
 
+**▶ [lucoslabs-cloud.github.io/tanamtenang-spaceapps](https://lucoslabs-cloud.github.io/tanamtenang-spaceapps/)**
+
 *Tanam tenang* — "plant calmly".
 
 The NASA Space Apps Challenge 2026 build of TanamTenang, for *Field Shift:
@@ -282,26 +284,38 @@ scenario that has no normals behind it.
 
 ## Deploying
 
-`dist/` is static. Anything will serve it:
+It is already deployed. `.github/workflows/deploy.yml` builds on every push
+to `main` and publishes to GitHub Pages at the link at the top of this file.
+The workflow runs `npm run build`, which type-checks before it bundles, so a
+push that breaks the engine fails there rather than shipping a broken map.
+No secrets are involved: the snapshot is committed, so the build needs no
+database and no Earthdata token.
 
-```bash
-npm run build
-```
+**What a visitor actually downloads**, measured against the live site rather
+than estimated:
 
-- **Azure Static Web Apps** — point it at `hackathon`, build command
-  `npm run build`, output `dist`.
+| | On the wire |
+|---|---|
+| The 25 grid rasters | 1.71 MB |
+| The JSON — catalogue, climate, vocabulary, glossary, boundary | 0.10 MB |
+| App code, MapLibre, CSS | ~0.40 MB |
+
+GitHub Pages gzips `application/octet-stream`, so the rasters arrive at
+about 40% of their 6.7 MB on disk. That is worth checking on any other host
+before trusting it — the app works either way and simply downloads four
+times as much if the host does not compress.
+
+`dist/` is plain static output, so anything else will serve it too:
+
+- **Azure Static Web Apps** — app location `/`, output location `dist`.
 - **Firebase Hosting / Google Cloud** — `firebase init hosting`, public
-  directory `dist`, configure as a single-page app: no.
-- **Porkbun / GoDaddy Registry free domain** — upload `dist` to any host and
-  point the domain at it; the free SSL certificate covers it.
+  directory `dist`, configure as a single-page app: **no**.
+- **A free Porkbun domain** (the GoDaddy Registry Space Apps offer) can be
+  pointed at the Pages site with a `CNAME` file and a DNS record; the free
+  SSL certificate covers it.
 
-Two things to check on whichever host:
-
-1. **Serve `.bin` with compression.** The rasters are 6.7 MB raw and 1.8 MB
-   gzipped. Most hosts gzip `application/octet-stream` by default; if yours
-   does not, the app still works and just downloads more.
-2. **Nothing needs a rewrite rule.** There is no router — the whole app is one
-   page — so no SPA fallback is required.
+There is no router — the whole app is one page — so no host needs an SPA
+rewrite rule.
 
 ---
 

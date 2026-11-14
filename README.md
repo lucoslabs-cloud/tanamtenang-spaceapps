@@ -155,6 +155,28 @@ the geometric mean and the coverage figure falls — so a live point reports a
 lower coverage than a district cell and the panel names every requirement it
 could not look at.
 
+### 5. Shot 2: The Orbital Zoom (In-App Take)
+
+Built directly into the application for video presentation and reproducible recording:
+- **NASA GIBS True-Colour orbital backdrop**: Renders directly on a 3D globe (MapLibre 6 globe projection) using VIIRS SNPP Corrected Reflectance TrueColor imagery from NASA EOSDIS GIBS (`2024-09-15` or Blue Marble).
+- **Continuous 3.2 s camera descent to Sri Aman**: Centered on the district centroid (`[111.507, 1.256]`, zoom 9.4, pitch 35°, bearing −12°), with the district boundary line smoothly drawing itself as the camera descends between zoom 6 and 9.
+- **700 ms staggered grid reveal**: On camera `moveend`, the real 67,855 analysis cells snap in via a distance-staggered wavefront from the centroid, complete with organic edge jitter and an alpha/brightness overshoot before settling into steady state.
+- **Zero chrome for recording**: Open `?cinematic=1` or click **Shot 2 Take** in the header or Map view. Press `[F11]` for fullscreen recording with OBS Studio (Window Capture, 2560×1440 at 60 fps).
+- **Interactive controls & hotkeys**:
+  - `[Space]` or `[R]`: Retake instantly.
+  - `[F]`: Fullscreen toggle.
+  - `[H]`: Hide/show controls HUD.
+  - `[Esc]`: Return to standard app view.
+- **URL parameters**:
+  - `?cinematic=1`: Run the continuous scripted take.
+  - `?zoom=1.6`: Starting orbital zoom (`1.6` for orbit drama, `2.4` for smoother first second on lower-end GPUs).
+  - `?duration=3200`: Camera descent duration in ms.
+  - `?snap=700`: Grid reveal sweep duration in ms.
+  - `?basemap=viirs|bluemarble`: NASA VIIRS TrueColor or Blue Marble.
+  - `?date=2024-09-15`: NASA GIBS imagery date.
+  - `?crop=wet-paddy`: Specific enterprise to score and reveal.
+  - `?clean=1`: Completely hide the HUD and status pill.
+
 ---
 
 ## How a score is built
@@ -339,7 +361,7 @@ Written at length in the app itself, and worth repeating here:
 
 ---
 
-## Licence
+## Licence & Attributions
 
 Code under the MIT Licence — see [`LICENSE`](LICENSE).
 
@@ -347,5 +369,10 @@ The data is not ours to relicense: NASA datasets are public domain, SoilGrids
 is CC BY 4.0, OpenStreetMap is ODbL. Per-dataset terms are carried in
 `public/data/datasets.json`, shown in the app, and summarised in
 [`DATA-LICENCES.md`](DATA-LICENCES.md).
+
+Use of Super Intelligence (SI) tools (including ElevenLabs for video narration
+and LLMs for code acceleration) is fully disclosed in
+[`AI-ATTRIBUTION.md`](AI-ATTRIBUTION.md) in accordance with NASA Space Apps Challenge
+submission requirements.
 
 NASA does not endorse this project, and this project is not a NASA product.
